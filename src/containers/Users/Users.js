@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Users.module.css'
-
+import { Button } from 'reactstrap';
 const Users = props => {
     const [tableRows, setTableRows] = useState();
     useEffect(() => {
@@ -10,8 +10,21 @@ const Users = props => {
                     <td className={styles.Td}>{user.firstName}</td>
                     <td className={styles.Td}>{user.lastName}</td>
                     <td className={styles.Td}>{user.school}</td>
-                    <td className={styles.Td}><button onClick={() => props.delete(user)}>DELETE</button></td>
-                    <td className={styles.Td}><button onClick={() => props.edit(true, user)}>EDIT</button></td>
+                    <td className={styles.Td}>
+                    <Button className="btn-icon btn-2" color="primary" type="button" onClick={() => props.delete(user)}>
+                        <span className="btn-inner--icon">
+                        <i className="fa fa-trash-o fa-lg"></i>
+                        </span>
+                    </Button>
+                    </td>
+                    <td className={styles.Td}>
+                    <Button className="btn-icon btn-2" color="primary" onClick={() => props.edit(true, user)} type="button">
+                        <span className="btn-inner--icon">
+                        <i className="fa fa-edit fa-lg"></i>
+                        </span>
+                    </Button>
+                    </td>
+ 
                 </tr>
             )
         }
@@ -23,7 +36,12 @@ const Users = props => {
     return(
         
         <div className={styles.Table}>
-            <button onClick={() => props.showAddUser(true)}>Add User</button>
+            <Button className="btn-icon btn-3" color="primary" type="button" onClick={() => props.showAddUser(true)}>
+                <span className="btn-inner--icon">
+                <i className="fa fa-user-plus fa-lg"></i>
+                </span>
+                <span className="btn-inner--text">Add User</span>
+            </Button>
             <table className={styles.TableUsers}>
                 <thead className={styles.Thead}>
                     <tr className={styles.Tr}>

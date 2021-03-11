@@ -1,5 +1,6 @@
 import React , {useState, useEffect }from 'react';
 import styles from './SideDrawer.module.css'
+import { Button, Input, FormFeedback } from 'reactstrap';
 
 const SideDrawer = props => {
     const initialFormInputs= {
@@ -9,14 +10,17 @@ const SideDrawer = props => {
     };
     const initialError = {
         firstName: {
+            touched: false,
             valid: false,
             errorMessage: ""
         },
         lastName: {
+            touched: false,
             valid: false,
             errorMessage: ""
         },
         school: {
+            touched: false,
             valid: false,
             errorMessage: ""
         }
@@ -69,7 +73,7 @@ const SideDrawer = props => {
         let updatedErrorElement = {
             ...error[formInput]
         }
-
+        updatedErrorElement.touched= true;
         if(event.target.value === ''){
             
             updatedErrorElement.valid = false;
@@ -100,17 +104,30 @@ const SideDrawer = props => {
         setError(initialError);
         props.toggleShow(false)
     }
+    const exitSideDrawer = () => {
+        props.toggleShow(false);
+    }
     
 
     return(
         <div className={attachedClasses.join(' ')} >
-            <input placeholder="First Name Here" name="firstName" value={formInputs.firstName} onChange={(event) => inputChangedHandler(event, "firstName")} /><br />
-            <span>{error.firstName.errorMessage}</span>
-            <input placeholder="Last Name Here" name="lastName" value={formInputs.lastName} onChange={(event) => inputChangedHandler(event, "lastName")} /><br />
+            <Button className="btn-icon btn-2 pull-right" color="danger" type="button" onClick={exitSideDrawer}>
+                <span className="btn-inner--icon">
+                    <i className="fa fa-times-circle fa-lg"></i>
+                </span>
+            </Button>
+            <Input invalid={!error.firstName.valid && error.firstName.touched} type="text" name="firstName" placeholder="First Name"  value={formInputs.firstName} onChange={(event) => inputChangedHandler(event, "firstName")}  />
+            <FormFeedback>{error.firstName.errorMessage}</FormFeedback>
+
+            {/* <span>{error.firstName.errorMessage}</span> */}
+            <br />
+            <Input invalid={!error.lastName.valid && error.lastName.touched} type="text" name="lastName" placeholder="Last Name"  value={formInputs.lastName} onChange={(event) => inputChangedHandler(event, "lastName")}  />
             <span>{error.lastName.errorMessage}</span>
-            <input placeholder="School Here" name="school" value={formInputs.school} onChange={(event) => inputChangedHandler(event, "school")} /><br />
+            <br />
+            <Input invalid={!error.school.valid && error.school.touched} type="text" name="school" placeholder="School"  value={formInputs.school} onChange={(event) => inputChangedHandler(event, "school")}  />
             <span>{error.school.errorMessage}</span>
-            <button disabled={!formIsValid} onClick={addUser}>{props.editUserInfo ? "EDIT" : "ADD"}</button>
+            <br />
+            <Button color="success" disabled={!formIsValid} onClick={addUser}>{props.editUserInfo ? "EDIT" : "ADD"}</Button>
         </div>
     )
 
