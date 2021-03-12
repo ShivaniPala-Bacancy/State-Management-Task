@@ -122,10 +122,10 @@ const SideDrawer = props => {
             {/* <span>{error.firstName.errorMessage}</span> */}
             <br />
             <Input invalid={!error.lastName.valid && error.lastName.touched} type="text" name="lastName" placeholder="Last Name"  value={formInputs.lastName} onChange={(event) => inputChangedHandler(event, "lastName")}  />
-            <span>{error.lastName.errorMessage}</span>
+            <FormFeedback>{error.lastName.errorMessage}</FormFeedback>
             <br />
             <Input invalid={!error.school.valid && error.school.touched} type="text" name="school" placeholder="School"  value={formInputs.school} onChange={(event) => inputChangedHandler(event, "school")}  />
-            <span>{error.school.errorMessage}</span>
+            <FormFeedback>{error.school.errorMessage}</FormFeedback>
             <br />
             <Button color="success" disabled={!formIsValid} onClick={addUser}>{props.editUserInfo ? "EDIT" : "ADD"}</Button>
         </div>
