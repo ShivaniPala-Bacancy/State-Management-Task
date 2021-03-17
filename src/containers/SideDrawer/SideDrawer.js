@@ -1,6 +1,8 @@
 import React , {useState, useEffect }from 'react';
 import styles from './SideDrawer.module.css'
 import { Button, Input, FormFeedback } from 'reactstrap';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const SideDrawer = props => {
     const initialFormInputs= {
@@ -112,9 +114,7 @@ const SideDrawer = props => {
     return(
         <div className={attachedClasses.join(' ')} >
             <Button className="btn-icon btn-2 pull-right" color="danger" type="button" onClick={exitSideDrawer}>
-                <span className="btn-inner--icon">
-                    <i className="fa fa-times-circle fa-lg"></i>
-                </span>
+                <FontAwesomeIcon icon={faTimesCircle} />
             </Button>
             <Input invalid={!error.firstName.valid && error.firstName.touched} type="text" name="firstName" placeholder="First Name"  value={formInputs.firstName} onChange={(event) => inputChangedHandler(event, "firstName")}  />
             <FormFeedback>{error.firstName.errorMessage}</FormFeedback>

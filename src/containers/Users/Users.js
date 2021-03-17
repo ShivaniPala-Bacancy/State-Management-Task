@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Users.module.css'
 import { Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash, faPen, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+
+
 const Users = props => {
     const [tableRows, setTableRows] = useState();
     useEffect(() => {
@@ -11,17 +15,14 @@ const Users = props => {
                     <td className={styles.Td}>{user.lastName}</td>
                     <td className={styles.Td}>{user.school}</td>
                     <td className={styles.Td}>
+
                     <Button className="btn-icon btn-2" color="primary" type="button" onClick={() => props.delete(user)}>
-                        <span className="btn-inner--icon">
-                        <i className="fa fa-trash-o fa-lg"></i>
-                        </span>
+                        <FontAwesomeIcon icon={faTrash} />
                     </Button>
                     </td>
                     <td className={styles.Td}>
                     <Button className="btn-icon btn-2" color="primary" onClick={() => props.edit(true, user)} type="button">
-                        <span className="btn-inner--icon">
-                        <i className="fa fa-edit fa-lg"></i>
-                        </span>
+                        <FontAwesomeIcon icon={faPen} />
                     </Button>
                     </td>
  
@@ -37,9 +38,7 @@ const Users = props => {
         
         <div className={styles.Table}>
             <Button className="btn-icon btn-3" color="primary" type="button" onClick={() => props.showAddUser(true)}>
-                <span className="btn-inner--icon">
-                <i className="fa fa-user-plus fa-lg"></i>
-                </span>
+                <FontAwesomeIcon icon={faUserPlus} />
                 <span className="btn-inner--text">Add User</span>
             </Button>
             <table className={styles.TableUsers}>
